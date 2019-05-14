@@ -172,14 +172,14 @@
           this.size === 'large' ? 'vselect--large' : '',
           this.error ? 'vselect--error' : ''
         ]
+      },
+      isAjax: function () {
+        return this.ajaxUrl !== ''
       }
     },
     methods: {
       updateFromStore: function (newValue) { // called from the formStore mixin
         this.inputValue = newValue
-      },
-      isAjax: function () {
-        return this.ajaxUrl !== ''
       },
       updateValue: function (value) {
         // see formStore mixin

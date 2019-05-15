@@ -137,13 +137,14 @@ window.vm = new Vue({
   },
   methods: {
     submitForm: function (event) {
+      let method = event.target.dataset['method'] ? event.target.dataset['method'] : 'PUT'
       if (!this.loading) {
         this.isFormUpdated = false
         this.$store.commit(FORM.UPDATE_FORM_LOADING, true)
         this.unSubscribe()
         this.$nextTick(() => { // let's wait for the loading state to be properly deployed (used to save wysiwyg fields)
           const saveType = this.getSaveType || document.activeElement.name
-          this.$store.dispatch(ACTIONS.SAVE_FORM, saveType).then(() => {
+          this.$store.dispatch(ACTIONS.SAVE_FORM, {saveType, method}).then(() => {
             this.mutationsSubscribe()
           })
         })

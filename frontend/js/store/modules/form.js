@@ -266,9 +266,17 @@ const actions = {
       })
     })
   },
-  [ACTIONS.SAVE_FORM] ({ commit, state, getters, rootState }, saveType) {
+  [ACTIONS.SAVE_FORM] ({ commit, state, getters, rootState }, args) {
     commit(FORM.CLEAR_FORM_ERRORS)
     commit(NOTIFICATION.CLEAR_NOTIF, 'error')
+
+    let saveType = args
+    let formMethod = 'PUT'
+
+    if (args.saveType) {
+      saveType = args.saveType
+      formMethod = args.method ? args.method : 'PUT'
+    }
 
     // update or create etc...
     commit(FORM.UPDATE_FORM_SAVE_TYPE, saveType)
@@ -280,7 +288,8 @@ const actions = {
     // - created blocks and repeaters
     const data = getFormData(rootState)
 
-    api.put(state.saveUrl, data, function (successResponse) {
+    formMethod = formMethod.toLowerCase()
+    api[formMethod](state.saveUrl, data, function (successResponse) {
       commit(FORM.UPDATE_FORM_LOADING, false)
 
       if (successResponse.data.hasOwnProperty('redirect')) {

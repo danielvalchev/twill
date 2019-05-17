@@ -17,6 +17,7 @@
     $moduleName = $moduleName ?? null;
     $storeUrl = $storeUrl ?? '';
     $inModal = $fieldsInModal ?? false;
+    $clearable = $clearable ?? false;
 @endphp
 
 @if ($unpack ?? false)
@@ -50,6 +51,7 @@
         @if ($required) :required="true" @endif
         @if ($inModal) :in-modal="true" @endif
         @if ($addNew) add-new='{{ $storeUrl }}' @elseif ($note) note='{{ $note }}' @endif
+        @if ($clearable) :clearable="true" @endif
         :has-default-store="true"
         size="large"
         in-store="value"
@@ -78,6 +80,7 @@
         @if ($addNew) add-new='{{ $storeUrl }}' @elseif ($note) note='{{ $note }}' @endif
         :has-default-store="true"
         @if ($searchable) :searchable="true" @endif
+        @if ($clearable) :clearable="true" @endif
         size="large"
         in-store="inputValue"
     >

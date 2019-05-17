@@ -18,6 +18,7 @@
             :transition="transition"
             :requiredValue="required"
             :maxHeight="maxHeight"
+            :clearable="clearable"
             @input="updateValue"
           >
             <span slot="no-options">{{ emptyText }}</span>
@@ -75,6 +76,10 @@
         default: false
       },
       searchable: {
+        type: Boolean,
+        default: false
+      },
+      clearable: {
         type: Boolean,
         default: false
       },

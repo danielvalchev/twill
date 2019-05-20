@@ -1,5 +1,5 @@
 <template>
-  <div class="vselectOuter">
+  <div class="vselectOuter" :class="{ 'vSelectOuter-clearable': clearable }">
     <a17-inputframe :error="error" :label="label" :note="note" :size="size" :name="name" :label-for="uniqId" :required="required" :add-new="addNew">
       <div class="vselect" :class="vselectClasses">
         <div class="vselect__field">

@@ -10,6 +10,7 @@
     $required = $required ?? false;
     $default = $default ?? false;
     $inline = $inline ?? false;
+    $disabled = $disabled ?? false;
 
     // do not use for now, but this will allow you to create a new option directly from the form
     $addNew = $addNew ?? false;
@@ -28,6 +29,7 @@
     @if ($required) :required="true" @endif
     @if ($inModal) :in-modal="true" @endif
     @if ($addNew) add-new='{{ $storeUrl }}' @elseif ($note) note='{{ $note }}' @endif
+    @if ($disabled) :disabled="true" @endif
     :has-default-store="true"
     in-store="value"
 >
@@ -40,7 +42,7 @@
 </a17-singleselect>
 
 @unless($renderForBlocks || $renderForModal || (!isset($item->$name) && null == $formFieldsValue = getFormFieldsValue($form_fields, $name)))
-@push('vuexStore')
-    @include('twill::partials.form.utils._selector_input_store')
-@endpush
+    @push('vuexStore')
+        @include('twill::partials.form.utils._selector_input_store')
+    @endpush
 @endunless

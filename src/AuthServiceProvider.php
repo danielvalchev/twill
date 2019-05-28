@@ -14,6 +14,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         Gate::before(function ($user, $ability) {
+            if (!$user instanceof User) {
+                return;
+            }
+
             if ($user->role === self::SUPERADMIN) {
                 return true;
             }
